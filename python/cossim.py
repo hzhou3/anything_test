@@ -26,17 +26,17 @@ if __name__ == '__main__':
 	batch_size = 4
 
 	# same tensor
-	gt = np.array([1, 2, 3, 4, 5.0]) 
-	pred = np.array([1, 2, 3, 4, 5.0])
+	gt = np.array([[1, 2, 3, 4, 5.0]]) 
+	pred = np.array([[1, 2, 3, 4, 5.0]])
 
-	gt = torch.from_numpy(np.tile(gt, (batch_size, 1)))
-	pred = torch.from_numpy(np.tile(pred, (batch_size, 1)))
+	gt = torch.from_numpy(np.tile(gt, (batch_size, 1, 1)))
+	pred = torch.from_numpy(np.tile(pred, (batch_size, 1, 1)))
 
-	print("gt.shape == pred.shape: {}".format(gt.shape == pred.shape))
+	print("gt.shape {} and pred.shape {}".format(gt.shape, pred.shape))
 	
 	sim = cosineSimilarity(gt, pred)
 	m = mse(gt, pred)
-	print(sim, m)
+	print(sim, sim.shape, m, m.shape)
 
 	# different tensor by scaling down by 5
 	gt = np.array([1, 2, 3, 4, 5.0]) 
@@ -45,8 +45,8 @@ if __name__ == '__main__':
 	gt = torch.from_numpy(np.tile(gt, (batch_size, 1)))
 	pred = torch.from_numpy(np.tile(pred, (batch_size, 1)))
 
-	print("gt.shape == pred.shape: {}".format(gt.shape == pred.shape))
+	print("gt.shape {} and pred.shape {}".format(gt.shape, pred.shape))
 	
 	sim = cosineSimilarity(gt, pred)
 	m = mse(gt, pred)
-	print(sim, m)
+	print(sim, sim.shape, m, m.shape)
